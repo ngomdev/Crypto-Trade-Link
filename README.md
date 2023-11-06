@@ -11,5 +11,50 @@ personnelles est une priorité, tout comme la conformité légale.
 <p align="center">
 <img src="./Crypto-Trade-Link/src/assets/crypto-trade-link.png" width="500" alt="accessibility text">
 </p>
+## Installation 💻 
 
+## Installation coté serveur💻(backend) 
+- Créez un dossier et se déplacer à l'intérieur :
 
+```bash
+  mkdir "nom_du_fichier" and cd "nom_du_fichier"
+```
+- Cloner le repos :
+
+```bash
+  git clone git@github.com:asseBadiane/Crypto-Trade-Link.git
+```  
+- Se déplacer à l'intérieur :
+
+```bash
+  cd Crypto-Trade-Link
+```
+- Installer les dépendances :
+
+```bash
+  npm install 
+```    
+- Lancez le serveur :
+
+```bash
+  npm run dev
+  
+```
+
+## Installation coté Ui💻(frontend) 
+- Se déplacer à l'intérieur :
+
+```bash
+  cd Crypto-Trade-Link
+```
+- Installer les dépendances :
+
+```bash
+  npm install 
+```    
+- Lancez le serveur :
+
+```bash
+  npm run dev
+  
+```
