@@ -10,6 +10,8 @@ import SignUp from './pages/SignUp'
 import CreateOffer from './pages/CreateOffer'
 import UpdateOffer from './pages/UpdateOffer'
 import Offer from './pages/Offer'
+import Header from './components/Header'
+import Footer from './components/Footer'
 
 
 
@@ -17,7 +19,8 @@ function App() {
   return (
     <>
     <h1 className="text-3xl font-bold text-center">Hello world!</h1> 
-      <BrowserRouter>    
+      <BrowserRouter>
+      <Header />    
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/about" element={<About />} />
@@ -30,6 +33,7 @@ function App() {
         <Route path="/update-offer" element={<UpdateOffer />} />
         <Route path="/offer" element={<Offer />} />
       </Routes>
+      <Footer />
       </BrowserRouter>
     </>
   )
