@@ -108,7 +108,6 @@ function Header() {
           <span className="text-[#b39124]">TRADE </span>
           <span className="text-slate-300"> LINK</span>
         </h1>
-
         <div className="hidden lg:block">{navList}</div>
         <div className="hidden items-center gap-x-2 lg:flex">
           <div className="relative flex w-full gap-2 md:w-max">
