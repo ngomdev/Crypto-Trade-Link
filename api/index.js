@@ -3,6 +3,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 dotenv.config();
 
+import user from "./routes /user.js";
+
 mongoose
   .connect(process.env.MONGO, {
     useNewUrlParser: true,
@@ -16,3 +18,5 @@ const app = express();
 app.listen("3000", () => {
   console.log("Server running on port 3000");
 });
+
+app.use("/api/user", user);
