@@ -15,14 +15,22 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => console.log("Connexion à MongoDB réussie !"))
-  .catch(() => console.log("Connexion à MongoDB échouée !"));
-
+  .then(() => console.log("Connection to MongoDB is Successfully✅ !"))
+  .catch(() => console.log("Connection to MongoDB failed!"));
 
 app.listen("3000", () => {
   console.log("Server running on port 3000");
 });
 
-
 app.use("/api/user", user);
 app.use("/api/auth", auth);
+
+app.use((err, req, res, next) => {
+  const statusCode = err.statusCode || 500;
+  const message = err.message || "Something went wrong!";
+  return res.status(statusCode).json({
+    success: false,
+    statusCode,
+    message,
+  });
+});
