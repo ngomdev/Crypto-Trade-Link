@@ -6,15 +6,58 @@ import otpGenerator from "otp-generator";
 import { errorHandler } from "../utils/error.js";
 
 export const signup = async (req, res, next) => {
-  const { name, email, password, role } = req.body;
-  const hashedPassword = await bcrypt.hash(password, 10);
-  const newUser = new User({ name, email, password: hashedPassword, role });
   try {
-    await newUser.save();
-    res.status(201).json("User created successfully!");
-  } catch (err) {
-    res.status(500).json(err.message);
-    next(err);
+    // get input data
+    const { name, email, password, role, otp } = req.body;
+
+    // Check if all details are there or not
+    if (!name || !email || !password || !otp) {
+      return next(errorHandler(403, "All Fields are required"));
+    }
+
+    // Check if user already exists
+    const existingUser = await User.findOne({ email });
+    if (existingUser) {
+      return next(errorHandler(400, "User already exists"));
+    }
+
+    // Find the most recent OTP for the email
+    const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+    console.log(response);
+    if (response.length === 0) {
+      // OTP not found for the email
+      return next(errorHandler(400, "The OTP is not valid"));
+    } else if (otp !== response[0].otp) {
+      // Invalid OTP
+      return next(errorHandler(400, "The OTP is not valid"));
+    }
+
+    // Secure password
+    let hashedPassword;
+    try {
+      hashedPassword = await bcrypt.hash(password, 10);
+    } catch (error) {
+      return next(
+        errorHandler(500, "Hashing password error: " + error.message)
+      );
+    }
+
+    // Create a new user
+    const newUser = await User.create({
+      name,
+      email,
+      password: hashedPassword,
+      role,
+    });
+
+    return res.status(200).json({
+      success: true,
+      user: newUser,
+      message: "User created successfully ✅",
+    });
+  } catch (error) {
+    console.error(error);
+    return next(errorHandler(500, "User registration failed"));
   }
 };
 

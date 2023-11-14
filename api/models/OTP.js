@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import { mailSender } from "../utils/mailsainder.js";
+import { mailSender } from "../utils/mailSender.js";
 
 
 // Define a schema for the OTP(One Time Password)
