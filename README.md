@@ -9,7 +9,7 @@ personnelles est une priorité, tout comme la conformité légale.
 
 # LOGO
 <p align="center">
-<img src="./Crypto-Trade-Link/src/assets/crypto-trade-link.png" width="500" alt="accessibility text">
+<img src="./Crypto-Trade-Link/src/assets/logo.png" width="500" alt="accessibility text">
 </p>
 
 # Features
