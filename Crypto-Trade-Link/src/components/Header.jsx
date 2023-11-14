@@ -40,7 +40,7 @@ function Header() {
           className="flex items-center gap-x-2 p-2 font-medium text-center"
         >
           <Link
-            to="/sign-in"
+            to="/sign-up"
             className="flex items-center text-slate-100 mr-5 pr-5"
           >
             <MdAccountCircle className="mr-1 h-16  text-slate-400" /> Account

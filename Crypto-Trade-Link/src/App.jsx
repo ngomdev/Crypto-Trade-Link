@@ -13,6 +13,7 @@ import Offer from "./pages/Offer";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 
+
 function App() {
   return (
     <>
@@ -31,6 +32,7 @@ function App() {
           <Route path="/offer" element={<Offer />} />
         </Routes>
         <Footer />
+        
       </BrowserRouter>
     </>
   );
