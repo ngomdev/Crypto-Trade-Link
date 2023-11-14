@@ -1,6 +1,7 @@
 import nodemailer from "nodemailer";
 
-const mailSender = async (email, title, body) => {
+
+export const mailSender = async (email, title, body) => {
   try {
     //to send email ->  firstly create a Transporter
     let transporter = nodemailer.createTransport({
@@ -18,7 +19,7 @@ const mailSender = async (email, title, body) => {
       subject: `${title}`,
       html: `${body}`,
     });
-
+   
     console.log("Info is here: ", info);
     return info;
   } catch (error) {
@@ -26,4 +27,5 @@ const mailSender = async (email, title, body) => {
   }
 };
 
-module.exports = mailSender;
+
+

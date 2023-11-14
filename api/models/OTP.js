@@ -1,4 +1,6 @@
 import mongoose from "mongoose";
+import { mailSender } from "../utils/mailsainder.js";
+
 
 // Define a schema for the OTP(One Time Password)
 const OTPSchema = new mongoose.Schema({
@@ -50,9 +52,10 @@ async function sendVerificationEmail(email, otp) {
             <h1>Please confirm your OTP</h1>
             <p>Here is your OTP code:</p>
             <p><strong>${otp}</strong></p>
-            <p><img src="https://example.com/path/to/your/image.png" alt="Image description"></p>
+            <p><img src="https://pycodelab.com/wp-content/uploads/2023/11/cropped-Ban8.png" alt="Image description"></p>
         </body>
     </html>`
+    
 		);
 		console.log("Email sent successfully: ", mailResponse);
 	} catch (error) {
@@ -73,4 +76,4 @@ OTPSchema.pre("save", async function (next) {
 
 const OTP = mongoose.model("OTP", OTPSchema);
 
-module.exports = OTP;
+export default OTP;
