@@ -8,10 +8,10 @@ import { errorHandler } from "../utils/error.js";
 export const signup = async (req, res, next) => {
   try {
     // get input data
-    const { name, email, password, role, otp } = req.body;
+    const { name, email, password, role } = req.body;
 
     // Check if all details are there or not
-    if (!name || !email || !password || !otp) {
+    if (!name || !email || !password ) {
       return next(errorHandler(403, "All Fields are required"));
     }
 
@@ -21,16 +21,16 @@ export const signup = async (req, res, next) => {
       return next(errorHandler(400, "User already exists"));
     }
 
-    // Find the most recent OTP for the email
-    const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
-    console.log(response);
-    if (response.length === 0) {
-      // OTP not found for the email
-      return next(errorHandler(400, "The OTP is not valid"));
-    } else if (otp !== response[0].otp) {
-      // Invalid OTP
-      return next(errorHandler(400, "The OTP is not valid"));
-    }
+    // // Find the most recent OTP for the email
+    // const response = await OTP.find({ email }).sort({ createdAt: -1 }).limit(1);
+    // console.log(response);
+    // if (response.length === 0) {
+    //   // OTP not found for the email
+    //   return next(errorHandler(400, "The OTP is not valid"));
+    // } else if (otp !== response[0].otp) {
+    //   // Invalid OTP
+    //   return next(errorHandler(400, "The OTP is not valid"));
+    // }
 
     // Secure password
     let hashedPassword;
