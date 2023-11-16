@@ -1,7 +1,7 @@
 import User from "../models/User.js";
 import OTP from "../models/OTP.js";
 import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
+import Jwt from "jsonwebtoken";
 import otpGenerator from "otp-generator";
 import { errorHandler } from "../utils/error.js";
 
@@ -55,7 +55,7 @@ export const signup = async (req, res, next) => {
       user: newUser,
       message: "User created successfully ✅",
     });
-  } catch (error) {
+      } catch (error) {
     console.error(error);
     return next(errorHandler(500, "User registration failed"));
   }
@@ -68,7 +68,7 @@ export const signin = async (req, res, next) => {
     if (!validUser) return next(errorHandler(404, "User not found!"));
     const validPassword = bcrypt.compare(password, validUser.password);
     if (!validPassword) return next(errorHandler(401, "Wrong password!"));
-    const token = jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
+    const token = Jwt.sign({ id: validUser._id }, process.env.JWT_SECRET);
     const { password: pass, ...rest } = validUser._doc;
     res
       .cookie("access_token", token, { httpOnly: true })
