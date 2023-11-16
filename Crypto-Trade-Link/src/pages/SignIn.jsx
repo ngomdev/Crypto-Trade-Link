@@ -1,23 +1,30 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Spinner } from "@material-tailwind/react";
+
+import { useSelector, useDispatch } from "react-redux";
+import {
+  signInStart,
+  signInSuccess,
+  signInError,
+} from "../redux/user/userSlice.js";
+
 function SignIn() {
   const [formData, setFormData] = useState({});
-  const [error, setError] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { loading, error } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   const handleChange = (e) => {
     setFormData({
       ...formData,
       [e.target.id]: e.target.value,
     });
-    // console.log(e.target.value);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      setLoading(true);
+      dispatch(signInStart());
       const res = await fetch("api/auth/signin", {
         method: "POST",
         headers: {
@@ -27,17 +34,14 @@ function SignIn() {
       });
       const data = await res.json();
       if (data.success == false) {
-        setError(data.message);
-        setLoading(false);
+        dispatch(signInError(data.message));
         return;
       }
-      setLoading(false);
-      setError(null);
+      dispatch(signInSuccess(data));
       navigate("/");
       // console.log(data);
     } catch (error) {
-      setLoading(false);
-      setError(error.message);
+      dispatch(signInError(error));
       console.log(error);
     }
   };
@@ -45,7 +49,6 @@ function SignIn() {
   console.log(formData);
   return (
     <section className="h-full bg-neutral-200 dark:bg-neutral-500 ">
-      {/* <div className="container h-full p-2"> */}
       <div className="flex h-full flex-wrap items-center justify-center text-neutral-800 dark:text-neutral-200">
         <div className="w-full">
           <div className="block rounded-lg bg-white shadow-lg dark:bg-neutral-800">
@@ -152,7 +155,6 @@ function SignIn() {
           </div>
         </div>
       </div>
-      {/* </div> */}
     </section>
   );
 }
