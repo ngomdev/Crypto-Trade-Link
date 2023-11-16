@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Spinner } from "@material-tailwind/react";
 import OAuth from "./OAuth";
@@ -71,9 +71,9 @@ function SignUp() {
                     <p className="mb-4 ">Please register an account</p>
                     <input
                       type="text"
-                      name="name"
-                      id="name"
-                      placeholder="Name"
+                      name="username"
+                      id="username"
+                      placeholder="Username"
                       className="mb-4 rounded-lg p-2 w-full text-black"
                       onChange={handleChange}
                     />

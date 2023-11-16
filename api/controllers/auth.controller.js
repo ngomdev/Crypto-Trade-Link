@@ -8,10 +8,10 @@ import { errorHandler } from "../utils/error.js";
 export const signup = async (req, res, next) => {
   try {
     // get input data
-    const { name, email, password, role } = req.body;
+    const { username, email, password, role, avatar } = req.body;
 
     // Check if all details are there or not
-    if (!name || !email || !password ) {
+    if (!username || !email || !password ) {
       return next(errorHandler(403, "All Fields are required"));
     }
 
@@ -44,10 +44,11 @@ export const signup = async (req, res, next) => {
 
     // Create a new user
     const newUser = await User.create({
-      name,
+      username,
       email,
       password: hashedPassword,
       role,
+      avatar
     });
 
     return res.status(200).json({
@@ -91,8 +92,8 @@ export const google = async (req, res, next) => {
        .json(rest)
    } else {
        const generatePassword = Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
-       const hashedPassword = bcrypt.hash(generatePassword, 10)
-       const newUser = new User({ username: req.body.username.split(' ').join('').toLowerCase() + Math.random().toString(36).slice(-4),
+       const hashedPassword = await bcrypt.hash(generatePassword, 10)
+       const newUser = new User({ username: req.body.name.split(' ').join('').toLowerCase() + Math.random().toString(36).slice(-4),
         email: req.body.email, password: hashedPassword, role: req.body.role, avatar: req.body.photo,})
        await newUser.save()
        const token = Jwt.sign({ id: newUser._id }, process.env.JWT_SECRET)
