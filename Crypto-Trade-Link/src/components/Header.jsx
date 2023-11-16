@@ -18,10 +18,12 @@ import { useEffect, useState } from "react";
 
 import Logo from "../assets/logo.png";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 function Header() {
   const [openNav, setOpenNav] = useState(false);
-  const [signin, setSignin] = useState(false);
+  // const [signin, setSignin] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
     window.addEventListener(
@@ -32,27 +34,26 @@ function Header() {
 
   const navList = (
     <ul className="mb-2 flex flex-col gap-2 lg:mb-0 lg:mt-0 lg:flex-row lg:items-center lg:gap-6">
-      {!signin ? (
+      {!currentUser ? (
         <Typography
           as="li"
           variant="small"
           color="blue-gray"
-          className="flex items-center gap-x-2 p-2 font-medium text-center"
-        >
+          className="flex items-center gap-x-2 p-2 font-bold text-center">
           <Link
-            to="/sign-up"
-            className="flex items-center text-slate-100 mr-5 pr-5"
-          >
-            <MdAccountCircle className="mr-1 h-16  text-slate-400" /> Account
+            to="/sign-in"
+            className="flex items-center text-slate-100 mr-5 pr-5">
+            <MdAccountCircle size={20} className="mr-1 h-16  text-slate-400" />{" "}
+            Sign-In
           </Link>
         </Typography>
       ) : (
-        <div className="flex gap-x-2 font-medium text-center">
+        <div className="flex gap-x-2 font-medium text-center mr-9 p-1">
           <Link to="/profile">
             <img
-              src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiQmcqzN9KSMx-hxPJfiB3yt59uQhN9R4IqjisfUEitJv9lbQVN14QYLsUfmgiH-AoH2VgTFMdRBaTWa9XXpU9aMV1fveYnRgRsf4peaqt_rCR_qyQ483NgjHHdhfYpOr8axyGWhk3DHw5lAUQkXl6NGMugPS7k6Apw7CUjqRMgwAv01i2_AXyRumuBfw/s16000/blank-profile-picture-hd-images-photo.JPG"
-              alt=""
-              className="rounded-full h-16 w-16 object-cover p-1 mr-5"
+              src={currentUser.avatar}
+              className="rounded-full w-16 object-cover  mr-9"
+              alt="profile"
             />
           </Link>
         </div>
@@ -62,42 +63,40 @@ function Header() {
         as="li"
         variant="small"
         color="blue-gray"
-        className="flex items-center gap-x-2 p-1 font-medium "
-      >
+        className="flex items-center gap-x-2 p-1 font-bold">
         <Link to="/" className="flex items-center text-slate-100 ">
-          <AiOutlineHome className="mr-1 h-16  text-slate-400" /> Home
+          <AiOutlineHome size={16} className=" mr-1 h-16  text-slate-400" />
+          Home
         </Link>
       </Typography>
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className="flex items-center gap-x-2 p-1 font-medium"
-      >
+        className="flex items-center gap-x-2 p-1 font-bold">
         <Link to="/offers" className="flex items-center text-slate-100">
-          <BsCurrencyBitcoin className="mr-1 h-16  text-slate-400" /> Traders
+          <BsCurrencyBitcoin size={16} className="mr-1 h-16  text-slate-400" />{" "}
+          Traders
         </Link>
       </Typography>
       <Typography
         as="li"
         variant="small"
         color="blue-gray"
-        className="flex items-center gap-x-2 p-1 font-medium"
-      >
+        className="flex items-center gap-x-2 p-1 font-bold">
         <Link to="/about" className="flex items-center text-slate-100 ">
-          <FcAbout className="mr-1 h-16  text-slate-400" /> About
+          <FcAbout size={16} className="mr-1 h-16  text-slate-400" /> About
         </Link>
       </Typography>
     </ul>
   );
 
   return (
-    <Navbar className="bg-[#050401e5] border-none mx-auto p-1">
-      <div className="container mx-auto flex flex-wrap items-center justify-between text-slate-100">
+    <Navbar className="bg-[#050401e5] border-none mx-auto">
+      <div className=" mx-auto flex flex-wrap items-center justify-between text-slate-100">
         <h1
           href="#"
-          className="mr-4 flex flex-wrap items-center cursor-pointer  font-bold"
-        >
+          className="mr-4 flex flex-wrap items-center cursor-pointer  font-bold">
           <div className="h-16 ">
             <img
               className="rounded-full object-cover shadow-sm h-full"
@@ -122,8 +121,7 @@ function Header() {
           </div>
           <Button
             size="md"
-            className="hover:shadow-lg hover:shadow-slate-200 rounded-lg p-2"
-          >
+            className="hover:shadow-lg hover:shadow-slate-200 rounded-lg p-2">
             Search
           </Button>
         </div>
@@ -131,8 +129,7 @@ function Header() {
           variant="text"
           className="ml-auto text-inherit hover:bg-transparent focus:bg-transparent active:bg-transparent lg:hidden"
           ripple={false}
-          onClick={() => setOpenNav(!openNav)}
-        >
+          onClick={() => setOpenNav(!openNav)}>
           {openNav ? (
             <GiTireIronCross size={30} className="text-slate-100 " />
           ) : (
@@ -156,8 +153,7 @@ function Header() {
             </div>
             <Button
               size="md"
-              className="hover:shadow-slate-200 text-slate-200 mt-3  p-2 rounded-lg sm:mt-0 w-full"
-            >
+              className="hover:shadow-slate-200 text-slate-200 mt-3  p-2 rounded-lg sm:mt-0 w-full">
               Search
             </Button>
           </div>

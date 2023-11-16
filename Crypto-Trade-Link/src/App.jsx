@@ -12,7 +12,7 @@ import UpdateOffer from "./pages/UpdateOffer";
 import Offer from "./pages/Offer";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
-
+import PrivateRoute from "./components/PrivateRoute";
 
 function App() {
   return (
@@ -24,15 +24,16 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/oauth" element={<OAuth />} />
           <Route path="/offers" element={<Offers />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/sign-in" element={<SignIn />} />
           <Route path="/sign-up" element={<SignUp />} />
           <Route path="/create-offer" element={<CreateOffer />} />
           <Route path="/update-offer" element={<UpdateOffer />} />
           <Route path="/offer" element={<Offer />} />
+          <Route element={<PrivateRoute />}>
+            <Route path="/profile" element={<Profile />} />
+          </Route>
         </Routes>
         <Footer />
-        
       </BrowserRouter>
     </>
   );
