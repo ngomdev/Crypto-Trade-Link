@@ -6,6 +6,13 @@ dotenv.config();
 import user from "./routes /user.route.js";
 import auth from "./routes /auth.route.js";
 
+const _dirname = path.resolve();
+app.use(express.static(path.join(_dirname, "Crypto-Trade-Link/build")));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.join(_dirname, "Crypto-Trade-Link", "build", "index.html"));
+});
+
 
 const app = express();
 app.use(express.json());
