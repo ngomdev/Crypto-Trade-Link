@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Spinner } from "@material-tailwind/react";
+import OAuth from "./OAuth";
 
 function SignUp() {
   const [formData, setFormData] = useState({});
@@ -110,6 +111,7 @@ function SignUp() {
                           {loading ? <Spinner /> : "Sign Up"}
                         </p>
                       </button>
+                      <OAuth />
                       <div className="p-3">
                         <a href="#!">Terms and conditions</a>
                       </div>

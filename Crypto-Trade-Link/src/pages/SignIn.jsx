@@ -8,6 +8,7 @@ import {
   signInSuccess,
   signInError,
 } from "../redux/user/userSlice.js";
+import OAuth from "./OAuth.jsx";
 
 function SignIn() {
   const [formData, setFormData] = useState({});
@@ -106,6 +107,7 @@ function SignIn() {
                           {loading ? <Spinner /> : "Sign In"}
                         </p>
                       </button>
+                      <OAuth />
 
                       <a className="pt-3" href="#!">
                         Terms and conditions
