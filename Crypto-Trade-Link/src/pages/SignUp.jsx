@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Spinner } from "@material-tailwind/react";
 import OAuth from "./OAuth";
+import Logo from "../assets/logo.png";
 
 function SignUp() {
   const [formData, setFormData] = useState({});
@@ -55,11 +56,7 @@ function SignUp() {
               <div className="px-4 md:px-0 lg:w-6/12">
                 <div className="md:mx-6 md:p-12">
                   <div className="text-center">
-                    <img
-                      className="mx-auto w-55"
-                      src="./src/assets/logo.png"
-                      alt="logo"
-                    />
+                    <img className="mx-auto w-55" src={Logo} alt="logo" />
                     <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
                       We Are The Sllers of Bitcoin
                     </h4>

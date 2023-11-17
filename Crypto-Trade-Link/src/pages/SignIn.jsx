@@ -9,6 +9,7 @@ import {
   signInError,
 } from "../redux/user/userSlice.js";
 import OAuth from "./OAuth.jsx";
+import Logo from "../assets/logo.png";
 
 function SignIn() {
   const [formData, setFormData] = useState({});
@@ -57,11 +58,7 @@ function SignIn() {
               <div className="px-8 md:px-0 lg:w-6/12">
                 <div className="md:mx-6 md:p-12">
                   <div className="text-center">
-                    <img
-                      className="mx-auto w-55"
-                      src="./src/assets/logo.png"
-                      alt="logo"
-                    />
+                    <img className="mx-auto w-55" src={Logo} alt="logo" />
                     <h4 className="mb-12 mt-1 pb-1 text-xl font-semibold">
                       We Are The Sllers of Bitcoin
                     </h4>
